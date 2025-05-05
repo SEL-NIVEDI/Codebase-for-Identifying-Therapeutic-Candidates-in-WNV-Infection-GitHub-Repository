@@ -1,0 +1,32 @@
+################--------3D visulaization of Docked complexes---------#####################
+
+import nglview as nv
+import MDAnalysis as mda
+
+# Load the PDB file
+pdb_file = r"C:\Users\ADMaC\Desktop\ICAR -Nivedi\BIOinformatices\Varsha\IL15RA_18(Zafirlukast).pdb"
+universe = mda.Universe(pdb_file)
+
+# Visualize the structure
+view = nv.show_mdanalysis(universe)
+
+# Highlight the ligand (assuming it is not part of the protein)
+ligand = universe.select_atoms("not protein")
+if ligand.n_atoms > 0:
+    view.add_ball_and_stick(selection="not protein", color="red")  # Color ligand
+
+# Show the 3D structure
+view
+
+
+
+################--------2D visulaization of Docked complexes---------#####################
+
+from rdkit import Chem
+from rdkit.Chem import Draw
+
+# Load molecule from PDB
+mol = Chem.MolFromPDBFile(r"C:\Users\ADMaC\Desktop\ICAR -Nivedi\BIOinformatices\Varsha\IL15RA_12(Sanguinarine).pdb")
+
+# Generate 2D drawing
+Draw.MolToImage(mol)
